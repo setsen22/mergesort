@@ -120,6 +120,7 @@ if (hi - lo <= CUTOFF) {
 
         int mid = lo + (hi - lo) / 2;
         mergesort(a, aux, lo, mid, less);
-        mergesort(a, aux, mid, hi, less);     
-        merge(a, aux, lo, mid, hi, less);        /* функцийг гүйцээ */        
+        mergesort(a, aux, mid + 1, hi, less);
+        merge(a, aux, lo, mid, hi, less);
+        }        /* функцийг гүйцээ */        
 }
