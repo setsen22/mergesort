@@ -64,7 +64,7 @@ void insertion_sort(Student a[],
         for (j = lo + 1; j <= hi; j++) {
                 key = a[j];
                 i = j - 1;
-                while (i >= lo && less(&key) > 0, &a[i],) {  
+               while (i >= lo && less(&key, &a[i]) > 0) {
                         a[i + 1] = a[i];
                         i--;
                 }
