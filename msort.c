@@ -83,7 +83,7 @@ void merge(Student a[],
 {
 int i, j, k;
 
-        for (k = lo; k <= mid; k++)    
+        for (k = lo; k <= hi; k++)      
                 aux[k] = a[k];
 
         i = lo;
