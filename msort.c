@@ -59,7 +59,7 @@ void insertion_sort(Student a[],
         for (j = lo + 1; j <= hi; j++) {
                 key = a[j];
                 i = j - 1;
-                while (i >= lo && less(&a[i], &key) > 0) {  
+                while (i >= lo && less(&key) > 0, &a[i],) {  
                         a[i + 1] = a[i];
                         i--;
                 }
