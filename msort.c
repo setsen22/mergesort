@@ -1,5 +1,5 @@
 #include "sort.h"
-
+#include <string.h>
 /*
   Нийлүүлэн эрэмбэлэх аргын цааш хуваагдах ёсгүй хэмжээ
  */
@@ -21,7 +21,11 @@ int nereer(const Student *a, const Student *b)
 */
 int nasaar(const Student *a, const Student *b)
 {
-        /* функцийг гүйцээ */
+if (a->age > b->age)
+                return -1;
+        if (a->age < b->age)
+                return 1;
+        return 0;        /* функцийг гүйцээ */
 }
 
 /*
@@ -30,7 +34,11 @@ int nasaar(const Student *a, const Student *b)
 */
 int golchoor(const Student *a, const Student *b)
 {
-        /* функцийг гүйцээ */
+if (a->gpa > b->gpa)
+                return -1;
+        if (a->gpa < b->gpa)
+                return 1;
+        return 0;        /* функцийг гүйцээ */
 	
 }
 
@@ -45,7 +53,18 @@ void insertion_sort(Student a[],
                     int lo, int hi,
                     int (*less)(const Student *, const Student *))
 {
-        /* функцийг гүйцээ */	
+ int i, j;
+        Student key;
+
+        for (j = lo + 1; j <= hi; j++) {
+                key = a[j];
+                i = j - 1;
+                while (i >= lo && less(&a[i], &key) > 0) {  
+                        a[i + 1] = a[i];
+                        i--;
+                }
+                a[i + 1] = key;
+        }        /* функцийг гүйцээ */	
 }
 
 /*
@@ -62,7 +81,23 @@ void merge(Student a[],
            int hi,
            int (*less)(const Student *, const Student *))
 {
-        /* функцийг гүйцээ */
+int i, j, k;
+
+        for (k = lo; k <= mid; k++)    
+                aux[k] = a[k];
+
+        i = lo;
+        j = mid + 1;
+        for (k = lo; k <= hi; k++) {
+                if (i > mid)
+                        a[k] = aux[j++];
+                else if (j > hi)
+                        a[k] = aux[i++];
+                else if (less(&aux[i], &aux[j]) >= 0)
+                        a[k] = aux[i++];
+                else
+                        a[k] = aux[j++];
+        }        /* функцийг гүйцээ */
 }
 
 
@@ -78,5 +113,13 @@ void mergesort(Student a[],
                int hi,
                int (*less)(const Student *, const Student *))
 {
-        /* функцийг гүйцээ */        
+if (hi - lo <= CUTOFF) {
+                insertion_sort(a, lo, hi, less);
+                return;
+        }
+
+        int mid = lo + (hi - lo) / 2;
+        mergesort(a, aux, lo, mid, less);
+        mergesort(a, aux, mid, hi, less);     
+        merge(a, aux, lo, mid, hi, less);        /* функцийг гүйцээ */        
 }
