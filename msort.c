@@ -12,7 +12,12 @@
 */
 int nereer(const Student *a, const Student *b)
 {
-        return strcmp(a->name, b->name) < 0;
+       int c = strcmp(a->name, b->name);
+        if (c > 0)
+                return -1;
+        if (c < 0)
+                return 1;
+        return 0;
 }
 
 /*
@@ -113,7 +118,7 @@ void mergesort(Student a[],
                int hi,
                int (*less)(const Student *, const Student *))
 {
-if (hi - lo <= CUTOFF) {
+		if (hi - lo <= CUTOFF) {
                 insertion_sort(a, lo, hi, less);
                 return;
         }
@@ -121,6 +126,5 @@ if (hi - lo <= CUTOFF) {
         int mid = lo + (hi - lo) / 2;
         mergesort(a, aux, lo, mid, less);
         mergesort(a, aux, mid + 1, hi, less);
-        merge(a, aux, lo, mid, hi, less);
-        }        /* функцийг гүйцээ */        
+        merge(a, aux, lo, mid, hi, less);        /* функцийг гүйцээ */        
 }
